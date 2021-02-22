@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Store {
     private static final Store INST = new Store();
 
-    private Map<Integer, Post> posts = new ConcurrentHashMap<>();
+    private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
 
     private Store() {
         posts.put(1, new Post(1, "Junior Java Job", "Yandex", "22.02.2021"));
