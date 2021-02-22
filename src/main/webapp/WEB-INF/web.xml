@@ -8,8 +8,16 @@
     <servlet-name>PostServlet</servlet-name>
     <servlet-class>servlet.PostServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>CandidateServlet</servlet-name>
+    <servlet-class>servlet.CandidateServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>PostServlet</servlet-name>
     <url-pattern>/post/save</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CandidateServlet</servlet-name>
+    <url-pattern>/candidate/save</url-pattern>
   </servlet-mapping>
 </web-app>
