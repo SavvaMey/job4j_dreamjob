@@ -6,12 +6,14 @@ import model.Post;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Store {
     private static final Store INST = new Store();
 
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
+    private static AtomicInteger postId = new AtomicInteger(4);
 
     private Store() {
         posts.put(1, new Post(1, "Junior Java Job", "Yandex", "22.02.2021"));
@@ -32,5 +34,10 @@ public class Store {
 
     public Collection<Candidate> findAllCandidates() {
         return candidates.values();
+    }
+
+    public void save(Post post) {
+        post.setId(postId.incrementAndGet());
+        posts.put(post.getId(), post);
     }
 }
