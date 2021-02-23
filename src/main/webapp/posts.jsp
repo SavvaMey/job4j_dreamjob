@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="store.MemStore" %>
+<%@ page import="store.PsqlStore" %>
 <%@ page import="model.Post" %>
 <%@ page import="java.util.Collection" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
