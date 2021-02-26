@@ -18,4 +18,14 @@ public interface Store {
 
     Candidate findByIdCandidate(int id);
 
+    String getImage(int id);
+
+    int saveImage(String name);
+
+    void updateCandidatePhoto(int idCandidate, int idPhoto);
+
+    void deletePhoto(int idPhoto);
+
+    void deleteCan(int idCandidate);
+
 }

@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="store.PsqlStore" %>
 <%@ page import="model.Post" %>
 <%@ page import="model.Candidate" %>
 <%@ page import="store.PsqlStore" %>
@@ -25,7 +24,7 @@
 <body>
 <%
     String id = request.getParameter("id");
-    Candidate candidate = new Candidate(0, "");
+    Candidate candidate = new Candidate(0, "", 0);
     if (id != null) {
         candidate = PsqlStore.instOf().findByIdCandidate(Integer.parseInt(id));
     }
@@ -35,9 +34,9 @@
         <div class="card" style="width: 100%">
             <div class="card-header">
                 <% if (id == null) { %>
-                Новая вакансия.
+                Новый кандидат.
                 <% } else { %>
-                Редактирование вакансии.
+                Редактирование кандидата.
                 <% } %>
             </div>
             <div class="card-body">
