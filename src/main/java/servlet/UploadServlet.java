@@ -27,6 +27,7 @@ public class UploadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         idCan = Integer.parseInt(req.getParameter("candidateId"));
+        req.setAttribute("user", req.getSession().getAttribute("user"));
         RequestDispatcher dispatcher = req.getRequestDispatcher("/upload.jsp");
         dispatcher.forward(req, resp);
     }
