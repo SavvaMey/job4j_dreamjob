@@ -28,6 +28,10 @@
     <servlet-name>DeleteServlet</servlet-name>
     <servlet-class>servlet.DeleteServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AuthServlet</servlet-name>
+    <servlet-class>servlet.AuthServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>PostServlet</servlet-name>
     <url-pattern>/posts.do</url-pattern>
@@ -51,5 +55,9 @@
   <servlet-mapping>
     <servlet-name>DeleteServlet</servlet-name>
     <url-pattern>/delete</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AuthServlet</servlet-name>
+    <url-pattern>/auth.do</url-pattern>
   </servlet-mapping>
 </web-app>
