@@ -37,5 +37,7 @@ public interface Store {
 
     Collection<User> findAllUsers();
 
+    User findByEmailUser(String email);
+
 //    void deleteUser(int idUser);
 }
