@@ -2,6 +2,7 @@ package store;
 
 import model.Candidate;
 import model.Post;
+import model.User;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,11 +57,13 @@ public class PsqlStore implements Store {
     public Collection<Post> findAllPosts() {
         List<Post> posts = new ArrayList<>();
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("SELECT * FROM post")
+             PreparedStatement ps = cn.prepareStatement(
+                     "SELECT * FROM post")
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    posts.add(new Post(it.getInt("id"), it.getString("name")));
+                    posts.add(new Post(it.getInt("id"),
+                            it.getString("name")));
                 }
             }
         } catch (Exception e) {
@@ -73,7 +76,8 @@ public class PsqlStore implements Store {
     public Collection<Candidate> findAllCandidates() {
         List<Candidate> candidates = new ArrayList<>();
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("SELECT * FROM candidate")
+             PreparedStatement ps = cn.prepareStatement(
+                     "SELECT * FROM candidate")
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
@@ -101,7 +105,8 @@ public class PsqlStore implements Store {
 
     private Post create(Post post) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO post(name) VALUES (?)",
+             PreparedStatement ps = cn.prepareStatement(
+                     "INSERT INTO post(name) VALUES (?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, post.getName());
@@ -159,7 +164,8 @@ public class PsqlStore implements Store {
 
     private Candidate create(Candidate candidate) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO candidate(name) VALUES (?)",
+             PreparedStatement ps = cn.prepareStatement(
+                     "INSERT INTO candidate(name) VALUES (?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, candidate.getName());
@@ -211,7 +217,8 @@ public class PsqlStore implements Store {
     public String getImage(int id) {
         String result = null;
         try (Connection cn = pool.getConnection();
-             PreparedStatement statement = cn.prepareStatement("SELECT * FROM photos WHERE id = (?)")
+             PreparedStatement statement = cn.prepareStatement(
+                     "SELECT * FROM photos WHERE id = (?)")
         ) {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
@@ -279,4 +286,89 @@ public class PsqlStore implements Store {
             LOG.error("db ex", throwable);
         }
     }
+
+    @Override
+    public User createUser(User user) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO users"
+                             + "(name, email, password) VALUES (?, ?, ?)",
+                     PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.execute();
+            try (ResultSet id = ps.getGeneratedKeys()) {
+                if (id.next()) {
+                    user.setId(id.getInt(1));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error("db ex", e);
+        }
+        return user;
+    }
+
+    @Override
+    public void updateUser(User user) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement statement = cn.prepareStatement(
+                     "UPDATE users set name = (?), email = (?), password = (?)"
+                             + " where id= (?) ")) {
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getEmail());
+            statement.setString(3, user.getPassword());
+            statement.setInt(4, user.getId());
+            statement.executeUpdate();
+        } catch (SQLException throwable) {
+            LOG.error("db ex", throwable);
+        }
+    }
+
+    @Override
+    public User findByIdUser(int id) {
+        User user = null;
+        try (Connection cn = pool.getConnection();
+             PreparedStatement statement = cn.prepareStatement(
+                     "SELECT * FROM users WHERE id=?")) {
+            statement.setInt(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    user = new User(resultSet.getInt(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4));
+                }
+            }
+        } catch (SQLException throwable) {
+            LOG.error("db ex", throwable);
+        }
+        return user;
+    }
+
+    @Override
+    public Collection<User> findAllUsers() {
+        List<User> users = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement(
+                     "SELECT * FROM users")
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    users.add(
+                            new User(it.getInt(1),
+                                    it.getString(2),
+                                    it.getString(3),
+                                    it.getString(4)));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error("db ex", e);
+        }
+        return users;
+    }
+//    @Override
+//    public void deleteUser(int idUser) {
+//
+//    }
 }
