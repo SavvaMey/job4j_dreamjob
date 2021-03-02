@@ -21,16 +21,17 @@
 </head>
 <body>
 <div class="container pt-3">
-
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Авторизация
+                <c:out value="${error}"/>
             </div>
             <div class="card-body">
                 <form action="<%=request.getContextPath()%>/auth.do" method="post">
                     <div class="form-group">
-                        <label>Почта</label>
+                        <p> </p>
+                        <label>Почта </label>
                         <input type="text" class="form-control" name="email">
                     </div>
                     <div class="form-group">

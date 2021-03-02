@@ -11,12 +11,14 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class AuthServlet extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         User user = PsqlStore.instOf().findByEmailUser(email);
         if (user == null) {
             req.setAttribute("error", "Пользователь с указанным email не существует");
+            System.out.println(req.getAttribute("error"));
             req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
         String password = req.getParameter("password");
