@@ -13,11 +13,13 @@
     function sendGreeting() {
         $.ajax({
             type: 'GET',
+            crossdomain: true,
             url: 'http://localhost:8080/dreamjob/greet',
-            data: 'name=' + $('#exampleInputEmail1').val(),
-            dataType: 'text'
+            data: {text : $('#exampleInputEmail1').val()},
+            dataType: 'json',
         }).done(function(data) {
-            $('#text').text(data);
+            $('#text').text(JSON.stringify(data.email));
+            // $('#text').text(JSON.stringify(data));
         }).fail(function(err){
             alert(err);
         });
