@@ -22,11 +22,7 @@
 </head>
 <body>
 <%--<%--%>
-<%--    String id = request.getParameter("candidateId");--%>
-<%--    Candidate candidate = new Candidate(0, "", 0);--%>
-<%--    if (id != null) {--%>
-<%--        candidate = PsqlStore.instOf().findByIdCandidate(Integer.parseInt(id));--%>
-<%--    }--%>
+<%--    Integer candidateId = Integer.parseInt(request.getParameter("candidateId"));--%>
 <%--%>--%>
 <div class="container">
     <div class="row">
@@ -69,7 +65,7 @@
 <%--        </tbody>--%>
 <%--    </table>--%>
     <h2>Upload image</h2>
-    <form action="<c:url value='/upload'/>" method="post" enctype="multipart/form-data">
+    <form action="<c:url value='/upload?candidateId=${candidateId}'/>" method="post"  enctype="multipart/form-data">
         <div class="checkbox">
             <input type="file" name="file">
         </div>

@@ -21,13 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UploadServlet extends HttpServlet {
-    // айди для использования в методе Post
-    private int idCan;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        idCan = Integer.parseInt(req.getParameter("candidateId"));
         req.setAttribute("user", req.getSession().getAttribute("user"));
+        req.setAttribute("candidateId", Integer.parseInt(req.getParameter("candidateId")));
         RequestDispatcher dispatcher = req.getRequestDispatcher("/upload.jsp");
         dispatcher.forward(req, resp);
     }
@@ -40,7 +38,7 @@ public class UploadServlet extends HttpServlet {
         factory.setRepository(repository);
         ServletFileUpload upload = new ServletFileUpload(factory);
         Store store = PsqlStore.instOf();
-        int idCandidate = idCan;
+        int idCandidate = Integer.parseInt(req.getParameter("candidateId"));
         int idPhoto = 0;
         try {
             List<FileItem> items = upload.parseRequest(req);
@@ -55,11 +53,8 @@ public class UploadServlet extends HttpServlet {
                         out.write(item.getInputStream().readAllBytes());
                     }
                     idPhoto = store.saveImage(file.getPath());
-                    System.out.println(idPhoto);
-//                } else {
-//                    idCandidate = Integer.parseInt(item.getString());
                 }
-                store.updateCandidatePhoto(idCan, idPhoto);
+                store.updateCandidatePhoto(idCandidate, idPhoto);
             }
         } catch (FileUploadException e) {
             e.printStackTrace();
