@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
@@ -33,6 +34,11 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
+                <c:if test="${not empty error}">
+                    <div style="color:#ff0000; font-weight: bold; margin: 30px 0;">
+                        <c:out value="${error}"/>
+                    </div>
+                </c:if>
                 Регистрация
             </div>
             <div class="card-body">
