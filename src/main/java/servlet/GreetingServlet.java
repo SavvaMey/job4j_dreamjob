@@ -20,7 +20,7 @@ public class GreetingServlet extends HttpServlet {
         resp.setContentType("json");
         resp.setCharacterEncoding("UTF-8");
         resp.setHeader("Access-Control-Allow-Origin", "*");
-        System.out.println( req.getReader().lines().collect(Collectors.joining()));
+        System.out.println(req.getReader().lines().collect(Collectors.joining()));
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         JSONObject json = new JSONObject();
         json.put("email", req.getParameter("text"));
