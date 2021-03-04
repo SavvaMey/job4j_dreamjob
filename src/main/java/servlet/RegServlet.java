@@ -18,6 +18,7 @@ public class RegServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
+        req.setCharacterEncoding("UTF-8");
         if (PsqlStore.instOf().findByEmailUser(email) != null) {
             req.setAttribute("error", "Пользователь с указанным email уже зарегистрирован");
             req.getRequestDispatcher("reg.jsp").forward(req, resp);

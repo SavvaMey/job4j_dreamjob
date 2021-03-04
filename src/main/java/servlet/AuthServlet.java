@@ -15,6 +15,7 @@ public class AuthServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
+        req.setCharacterEncoding("UTF-8");
         User user = PsqlStore.instOf().findByEmailUser(email);
         if (user == null) {
             req.setAttribute("error", "email not exist");
