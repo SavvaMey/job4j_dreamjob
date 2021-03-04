@@ -62,7 +62,7 @@
     <h2>Upload image</h2>
     <form action="<c:url value='/upload?candidateId=${candidateId}'/>" method="post"  enctype="multipart/form-data">
         <div class="checkbox">
-            <input type="file" name="file" id="file">
+            <input type="file" required name="file" id="file">
         </div>
         <button type="submit" class="btn btn-primary" onclick="return validate()">Submit</button>
     </form>
