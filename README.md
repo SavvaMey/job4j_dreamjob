@@ -8,10 +8,13 @@ jQuery, Ajax, Apache Tomcat.
 
 **Demonstration of the application:**
 
-![alt text](https://prnt.sc/10crk2m)
-![alt text](https://prnt.sc/10crkul)
-![alt text](https://prnt.sc/10crmki)
-![alt text](https://prnt.sc/10crmrg)
-![alt text](https://prnt.sc/10crmrg)
-![alt text](https://prnt.sc/10crn1g)
+![alt text](images/1.PNG)
+
+![alt text](images/2.PNG)
+
+![alt text](images/3.PNG)
+
+![alt text](images/4.PNG)
+
+![alt text](images/5.PNG)
 
