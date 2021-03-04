@@ -54,7 +54,11 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th scope="col">Названия</th>
+                        <th scope="col">Имя</th>
+                        <th scope="col">Город</th>
+                        <th scope="col">Удалить кандидата</th>
+                        <th scope="col">Скачать картинку</th>
+                        <th scope="col">Аватар</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -67,7 +71,10 @@
                                 <c:out value="${candidate.name}"/>
                             </td>
                             <td>
-                                <a href='<c:url value="/delete?canID=${candidate.id}&photoID=${candidate.photoId}"/>'>Delete</a>
+                                <c:out value="${cities[candidate.cityId]}"/>
+                            </td>
+                            <td>
+                                <a href='<c:url value="/delete?canID=${candidate.id}&photoID=${candidate.photoId}&cityId=${candidate.cityId}"/>'>Delete</a>
                             </td>
                             <td><a href="<c:url value='/download?name=${candidate.photoId}'/>">Download</a></td>
                             <td>

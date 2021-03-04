@@ -18,12 +18,25 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        function validate() {
+            let result = true;
+            let fileName = document.getElementById('file').files[0].name;
+            console.log(fileName);
+
+            if (fileName === '') {
+                alert('all input tables required')
+                result = false;
+            }
+            return result;
+        }
+    </script>
+
     <title>Работа мечты</title>
 </head>
 <body>
-<%--<%--%>
-<%--    Integer candidateId = Integer.parseInt(request.getParameter("candidateId"));--%>
-<%--%>--%>
 <div class="container">
     <div class="row">
         <ul class="nav">
@@ -46,30 +59,12 @@
     </div>
 </div>
 <div class="container pt-3">
-<%--    <table class="table">--%>
-<%--        <thead>--%>
-<%--        <tr>--%>
-<%--            <th>URL</th>--%>
-<%--            <th>View</th>--%>
-<%--        </tr>--%>
-<%--        </thead>--%>
-<%--        <tbody>--%>
-<%--        <c:forEach items="${images}" var="image" varStatus="status">--%>
-<%--            <tr valign="top">--%>
-<%--                <td><a href="<c:url value='/download?name=${image}'/>">Download</a></td>--%>
-<%--                <td>--%>
-<%--                    <img src="<c:url value='/download?name=${image}'/>" width="100px" height="100px"/>--%>
-<%--                </td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
-<%--        </tbody>--%>
-<%--    </table>--%>
     <h2>Upload image</h2>
     <form action="<c:url value='/upload?candidateId=${candidateId}'/>" method="post"  enctype="multipart/form-data">
         <div class="checkbox">
-            <input type="file" name="file">
+            <input type="file" name="file" id="file">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-primary" onclick="return validate()">Submit</button>
     </form>
 </div>
 </body>

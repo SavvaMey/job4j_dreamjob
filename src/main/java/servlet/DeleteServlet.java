@@ -14,13 +14,11 @@ public class DeleteServlet extends HttpServlet {
         req.setAttribute("user", req.getSession().getAttribute("user"));
         int idPhoto = Integer.parseInt(req.getParameter("photoID"));
         int idCan = Integer.parseInt(req.getParameter("canID"));
+        int idCity = Integer.parseInt(req.getParameter("cityId"));
         PsqlStore.instOf().deleteCan(idCan);
         PsqlStore.instOf().deletePhoto(idPhoto);
+        PsqlStore.instOf().deleteCity(idCity);
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        super.doPost(req, resp);
-//    }
 }

@@ -14,6 +14,19 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script>
+        function validate() {
+            let result = true;
+            let email = $('#email').val();
+            let password = $('#password').val();
+            if ((email === '') || (password === ''))
+            {
+                alert('all input tables required')
+                result = false;
+            }
+            return result;
+        }
+    </script>
     <title>Работа мечты</title>
 </head>
 <body>
@@ -31,15 +44,14 @@
             <div class="card-body">
                 <form action="<%=request.getContextPath()%>/auth.do" method="post">
                     <div class="form-group">
-                        <p> </p>
                         <label>Почта </label>
-                        <input type="text" class="form-control" name="email">
+                        <input type="text" class="form-control" name="email" id="email">
                     </div>
                     <div class="form-group">
                         <label>Пароль</label>
-                        <input type="text" class="form-control" name="password">
+                        <input type="password" class="form-control" name="password" id="password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <button type="submit" class="btn btn-primary" onclick="return validate();">Войти</button>
                 </form>
                 <form action="<%=request.getContextPath()%>/reg.do" method="get">
                     <button type="submit" class="btn btn-primary">Регистрация</button>

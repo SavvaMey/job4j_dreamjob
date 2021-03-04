@@ -39,5 +39,14 @@ public interface Store {
 
     User findByEmailUser(String email);
 
-//    void deleteUser(int idUser);
+    int saveCity(String name);
+
+    void updateCandidateCity(int idCandidate, int idCity);
+
+    void deleteCity(int idCity);
+
+    Collection<String> findAllCities();
+
+    String findByIdCity(int id);
+
 }

@@ -16,6 +16,7 @@ public class MemStore implements Store {
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
     private static AtomicInteger postId = new AtomicInteger(0);
     private static AtomicInteger candidateId = new AtomicInteger(0);
+    private static AtomicInteger cityId = new AtomicInteger(0);
 
     private MemStore() {
 //        posts.put(1, new Post(1, "Junior Java Job"));
@@ -126,6 +127,31 @@ public class MemStore implements Store {
 
     @Override
     public User findByEmailUser(String email) {
+        return null;
+    }
+
+    @Override
+    public int saveCity(String name) {
+        return 0;
+    }
+
+    @Override
+    public void updateCandidateCity(int idCandidate, int idCity) {
+
+    }
+
+    @Override
+    public void deleteCity(int idCity) {
+
+    }
+
+    @Override
+    public Collection<String> findAllCities() {
+        return null;
+    }
+
+    @Override
+    public String findByIdCity(int id) {
         return null;
     }
 }

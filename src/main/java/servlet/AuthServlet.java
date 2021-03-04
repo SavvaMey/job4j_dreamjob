@@ -17,7 +17,7 @@ public class AuthServlet extends HttpServlet {
         String email = req.getParameter("email");
         User user = PsqlStore.instOf().findByEmailUser(email);
         if (user == null) {
-            req.setAttribute("error", "Пользователь с указанным email не существует");
+            req.setAttribute("error", "email not exist");
             System.out.println(req.getAttribute("error"));
             req.getRequestDispatcher("login.jsp").forward(req, resp);
         }

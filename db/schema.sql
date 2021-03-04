@@ -11,7 +11,8 @@ CREATE TABLE photos (
 CREATE TABLE candidate (
     id SERIAL PRIMARY KEY,
     name TEXT,
-    photoId int references photos(id)
+    photoId int references photos(id),
+    cityId int references city(id)
 );
 
 CREATE TABLE users (
@@ -20,3 +21,11 @@ CREATE TABLE users (
     email TEXT,
     password TEXT
 );
+
+CREATE TABLE city (
+    id serial primary key,
+    name TEXT
+);
+
+INSERT INTO city(name) VALUES ('Moskow');
+INSERT INTO city(name) VALUES ('Izhevsk');
