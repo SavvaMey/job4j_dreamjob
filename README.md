@@ -6,7 +6,7 @@
 
 **Technologies used:**
 
-Java, Maven, Servlets, JSP, jstl, JDBC, PostgreSQL, MVC Pattern, Mockito, Travis CI, HTML/CSS, JS,
+Java, Maven, log4j, slf4j Servlets, JSP, jstl, JDBC, PostgreSQL, MVC Pattern, Mockito, Travis CI, HTML/CSS, JS,
 jQuery, Ajax, JSON, Apache Tomcat.
 
 **Demonstration of the application:**
